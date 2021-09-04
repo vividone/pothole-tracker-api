@@ -10,6 +10,7 @@ swaggerDocument = require('../swagger.json');
 // ==> Rotas da API:
 const index = require('./routes/index');
 const potholeRoute = require('./routes/pothole.route');
+const witnessRoute = require('./routes/witness.route');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use(cors());
 
 app.use(index);
 app.use('/api/', potholeRoute);
+app.use('/api/', witnessRoute);
 
 app.use(
     '/api-docs',

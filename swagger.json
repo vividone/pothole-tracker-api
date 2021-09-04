@@ -14,7 +14,11 @@
     "tags": [
       {
         "name": "PotHoles",
-        "description": "API for users in the system"
+        "description": "CRUD for Potholes "
+      },
+      {
+        "name": "Witnesses",
+        "description": "Manages witnesses to a potholes"
       }
     ],
     "schemes": ["http"],
@@ -165,7 +169,39 @@
 
         }
       },
+      "Witness": {
+        "required": ["name", "hide_identity"],
+        "properties": {
+          "potholeid": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+         
+          "name": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "email": {
+              "type":"string"
+          },
+          "hide_identity":{
+            "type":"integer"
+          },
+          "dangerLevel": {
+            "type":"integer"
+          },
+          "date_witnessed": {
+              "type":"string"
+          }
+        }
+      },
       "PotHoles": {
+        "type": "array",
+        "$ref": "#/definitions/PotHole"
+      },
+      "Witnesses": {
         "type": "array",
         "$ref": "#/definitions/PotHole"
       }
