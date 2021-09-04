@@ -1,0 +1,173 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "PotHoles Locator API",
+      "description": "API to List Locations of all PotHoles across Nigeria",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3005",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "PotHoles",
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+      "/api/potholes": {
+        "get": {
+          "tags": ["PotHoles"],
+          "summary": "Get all potholes in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/PotHole"
+              }
+            }
+          }
+        }
+      },
+      "/api/create/potholes": {
+        "post": {
+          "tags": ["PotHoles"],
+          "summary": "Create new pothole",
+          "parameters": [
+            {
+                "name": "pothole",
+                "in": "body",
+                "description": "PotHole to be listed",
+                "schema": {
+                    "$ref": "#/definitions/PotHole"
+                  }
+            }
+          ],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "PotHole Added Sucessfully",
+              "schema": {
+                "$ref": "#/definitions/PotHole"
+              }
+            }
+          }
+        }
+      },
+      "/api/potholes/{id}": {
+        "parameters": [
+            {
+                "name": "potholeid",
+                "in": "path",
+                "description": "ID of PotHole to be update",
+                "required": true,
+                "type":"integer"
+                
+            }
+          ],
+        "put": {
+          "tags": ["PotHoles"],
+          "summary": "Update a particular pothole record",
+          "updatePotHole": {
+                "required": ["roadName", "locationState", "dangerLevel"],
+                "properties": {
+                  "_id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                  },
+                 
+                  "roadName": {
+                    "type": "string"
+                  },
+                  "locationState": {
+                    "type": "string"
+                  },
+                  "locationLGA": {
+                      "type":"string"
+                  },
+                  "noOfPotHoles":{
+                    "type":"integer"
+                  },
+                  "dangerLevel": {
+                    "type": "integer"
+                  },
+                  "status": {
+                      "type":"string"
+                  }
+                
+              }
+          },
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "PotHole Added Sucessfully",
+              "schema": {
+                "$ref": "#/definitions/PotHole"
+              }
+            }
+          }
+        },
+        "delete": {
+            "tags": ["PotHoles"],
+            "summary": "Delete pothole record by given ID",
+            "responses": {
+              "200": {
+                "description": "PotHole deleted",
+                "schema": {
+                  "$ref": "#/definitions/PotHole"
+                }
+              }
+            }
+          
+        }
+      }
+        
+    },
+    "definitions": {
+      "PotHole": {
+        "required": ["roadName", "locationState", "dangerLevel"],
+        "properties": {
+          "potholeid": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+         
+          "roadName": {
+            "type": "string"
+          },
+          "locationState": {
+            "type": "string"
+          },
+          "locationLGA": {
+              "type":"string"
+          },
+          "noOfPotHoles":{
+            "type":"integer"
+          },
+          "dangerLevel": {
+            "type": "integer"
+          },
+          "status": {
+              "type":"string"
+          },
+          "witnesses":{
+            "type":"array"
+        },
+        "gallery":{
+            "type":"array"
+        }
+
+        }
+      },
+      "PotHoles": {
+        "type": "array",
+        "$ref": "#/definitions/PotHole"
+      }
+    }
+  }
